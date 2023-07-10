@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="d-flex justify-content-end"></div>
+    welcome {{request.user}}
+    <a href="{%url 'signout'%}"  class="btn btn-warning text-white me-3 mb-5" style="float: right;" >Logout</a>
+    <a href="{%url 'todo-complete'%}" class="btn btn-danger text-white me-3 mb-5" style="float: right;" >Completed Todos</a>
+    <a href="{%url 'todo-add'%}" class="btn btn-success text-white me-5 mb-5" style="float: right;" >Add Your Todo</a>
+    <h1 class="text-center">Todo list</h1>
+
+    <div class="container">
+
+        {%for m in messages%}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{m}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {%endfor%}
+
+        <table class="table table-striped">
+            <tr>
+                <th>sl No</th>
+                <th>TaskName</th>
+                <th>User</th>
+                <th>status</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+            {%for t in todos%}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{t.task_name}}</td>
+                <td>{{t.user}}</td>
+                <td>{{t.status}}</td>
+                <td>{{t.date}}</td>
+                <td>
+                    <a href="{%url 'todo-delete' t.id%}" class="btn btn-outline-info text-danger">Delete</a>
+                    <a href="{%url 'todo-detail' t.id%}" class="btn btn-outline-info text-success">Detail</a>
+                    <a href="{%url 'todo-update' t.id%}" class="btn btn-outline-info text-warning">Mark As Done</a>
+                </td>
+            </tr>
+            
+            {%endfor%}
+        </table>
+    </div>
+</body>
+</html>
