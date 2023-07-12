@@ -24,7 +24,6 @@ from rest_framework.routers import DefaultRouter
 from todoapi import views as todo_views
 from rest_framework.authtoken.views import ObtainAuthToken
 router=DefaultRouter()
-router.register("api/employees",api_views.EmployeesView,basename="employees")
 
 router.register("api/v1/employees",api_views.EmployeeViewsetView,basename="memployees")
 router.register("api/users",todo_views.UserView,basename="users")
